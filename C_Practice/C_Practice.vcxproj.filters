@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C_BaseBall.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="C_TextBook.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="June_LinkedList.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="June_movie.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="June_TextBook.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="June_BaseBall.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
