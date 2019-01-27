@@ -20,13 +20,30 @@ void InsertNode(int _nData) {
 	}
 	else {
 		NODE* pNode = head;
-		while (NULL != pNode->pNext) {
-			pNode = pNode->pNext;
+		//Case by Case
+		if (pNewNode->nData <= pNode->nData) {
+			pNewNode->pNext = pNode;
+			pNode->pPrev = pNewNode;
+			head = pNewNode;
 		}
-		pNode->pNext = pNewNode;
-		pNewNode->pPrev = pNode;
+		else {
+			//Mid
+			while (NULL != pNode->pNext) {
+				if (pNewNode->nData <= pNode->pNext->nData) {
+					pNewNode->pNext = pNode->pNext;
+					pNewNode->pPrev = pNode;
+					pNode->pNext->pPrev = pNewNode;
+					pNode->pNext = pNewNode;
+					break;
+				}
+				pNode = pNode->pNext;
+			}
+			if (pNode->pNext == NULL) {
+				pNewNode->pPrev = pNode;
+				pNode->pNext = pNewNode;
+			}
+		}
 	}
-	tail = pNewNode;
 }
 
 void PrintList_Head() {
@@ -49,8 +66,8 @@ void PrintList_Tail() {
 
 int main(void) {
 	InsertNode(1);
-	InsertNode(2);
-	InsertNode(3);
+	InsertNode(10);
+	InsertNode(7);
 	InsertNode(4);
 	InsertNode(5);
 	PrintList_Head();
