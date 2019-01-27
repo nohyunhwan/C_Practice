@@ -10,7 +10,7 @@ typedef struct _node {
 
 NODE* head = NULL;
 
-void FindNode(int _nData) {
+int FindNode(int _nData) {
 	//if found, print Node index, data
 	//if not, print "Not Found"
 	NODE* pNode = head;
@@ -18,7 +18,7 @@ void FindNode(int _nData) {
 	while (NULL != pNode) {
 		if (_nData == pNode->nData) {
 			printf("Node Index: %d, Data: %d\n", nIndex, _nData);
-			return;
+			return 1;
 		}
 		else {
 			pNode = pNode->pNext;
@@ -26,10 +26,30 @@ void FindNode(int _nData) {
 		}
 	}
 	printf("Not Found!\n");
+	return 0;
 }
 
 void DeleteNode(int _nData) {
-
+	//FindNode first,
+	//case: Found / not Found
+	//if found, delete node, link the rest
+	//if not found, return;
+	NODE* pNode = head;
+	NODE* tmpNode = head;
+	//always make tmpNode previous pNode?
+	while (NULL != pNode) {
+		if (_nData == pNode->nData) {
+			//Delete and Link
+			printf("Delete %d!\n", pNode->nData);
+			tmpNode->pNext = pNode->pNext;
+			free(pNode);
+			pNode = tmpNode;
+		}
+		else {
+			tmpNode = pNode; //save the  pNode into tmpNode
+			pNode = pNode->pNext; //move pNode to next
+		}
+	}
 }
 //Insert a Node(Ordered)
 void InsertNode_Ordered(int _nData) {
@@ -92,6 +112,8 @@ int main(void) {
 	InsertNode(5);
 	PrintList();
 	FindNode(5);
+	DeleteNode(7);
+	PrintList();
 	ClearList();
 	return 0;
 }
