@@ -36,6 +36,11 @@ void DeleteNode(int _nData) {
 	//if not found, return;
 	NODE* pNode = head;
 	NODE* tmpNode = head;
+	if (_nData == head->nData) {
+		head = head->pNext;
+		free(tmpNode);
+		tmpNode = NULL;
+	}
 	//always make tmpNode previous pNode?
 	while (NULL != pNode) {
 		if (_nData == pNode->nData) {
@@ -43,7 +48,8 @@ void DeleteNode(int _nData) {
 			printf("Delete %d!\n", pNode->nData);
 			tmpNode->pNext = pNode->pNext;
 			free(pNode);
-			pNode = tmpNode;
+			pNode = NULL;
+			break;
 		}
 		else {
 			tmpNode = pNode; //save the  pNode into tmpNode
@@ -57,6 +63,8 @@ void InsertNode_Ordered(int _nData) {
 	pNewNode->nData = _nData; //Initialization
 	pNewNode->pNext = NULL;
 
+	//4가지 경우
+	//
 	if (NULL == head) {
 		head = pNewNode;
 	}
@@ -112,7 +120,7 @@ int main(void) {
 	InsertNode(5);
 	PrintList();
 	FindNode(5);
-	DeleteNode(7);
+	DeleteNode(10);
 	PrintList();
 	ClearList();
 	return 0;

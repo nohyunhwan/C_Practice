@@ -23,7 +23,7 @@
 -삭제 : 영화이름으로 검색 후, 해당 영화데이터 삭제.
 -평점부여: 영화이름 검색 후, 평점 부여하는 기능.
 		평점은 다수가 부여할 수 있음. 평균평점이 있어야 함.
-4.이 모든 정보를 파일로 저장(txt)
+4.이 모든 정보를 파일로 저장(txt,bin)
 */
 typedef struct _movieData {
 	char title[64];
@@ -121,7 +121,7 @@ int main()
 {
 	const int MOVIENUM = 5; //영화 데이터의 갯수. 
 	int nFlag = 0;//기능 선택 flag
-	/*
+	
 	MOVIEDATA* movieList = (MOVIEDATA*)malloc(sizeof(MOVIEDATA) * MOVIENUM);
 	Menu(&nFlag);
 	printf("malloc size : %d\n", sizeof(*movieList));
@@ -129,6 +129,6 @@ int main()
 	printf("realloc size : %d\n", sizeof(*movieList));
 	free(movieList);
 	movieList = NULL;
-	*/
+	
 	return 0;
 }
