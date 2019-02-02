@@ -30,5 +30,11 @@
     <ClCompile Include="June_DoubleLList.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="June_Stack.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="June_Queue.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
