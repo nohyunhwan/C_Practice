@@ -139,11 +139,11 @@ int main(void) {
 
 		if (input >= GetAverage()) {
 			printf("\n Average = %d\n", GetAverage());
-			InsertNodeFromHead(input);
+			InsertNodeFromTail(input);
 		}
 		else {
 			printf("\n Average = %d\n", GetAverage());
-			InsertNodeFromTail(input);
+			InsertNodeFromHead(input);
 		}
 	}
 	PrintList_Head();
