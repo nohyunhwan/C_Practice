@@ -7,7 +7,6 @@
 2.삽입하려는 값이 평균보다 작거나 같으면, 헤드부터 탐색 후 삽입 //Comp Func CallBack??
 3.삽입하려는 값이 평균보다 크면, 테일부터 탐색 후 삽입
 */
-
 typedef struct _node {
 	int nData;
 	struct _node* pPrev;
@@ -15,24 +14,86 @@ typedef struct _node {
 }NODE;
 NODE* head = NULL;
 NODE* tail = NULL;
-int avg = 0, count = 1;
+int avg = 0;
 
 int GetAverage() {
 	int sum = 0;
+	int count = 0;
 	NODE* pNode = head;
 	while (NULL != pNode) {
 		sum += pNode->nData;
 		pNode = pNode->pNext;
 		count++;
 	}
-	avg = sum / count;
+	if (count != 0)
+		avg = sum / count;
+	else
+		return 0;
 	return avg;
 }
 
-int FindNode(int _nData) {
-
+NODE* FindNode(int _nData) {
+	//if found, print Node index, data
+	//if not, print "Not Found"
+	NODE* pNode = head;
+	int nIndex = 1;
+	while (NULL != pNode) {
+		if (_nData == pNode->nData) {
+			printf("Node Index: %d, Data: %d\n", nIndex, _nData);
+			return pNode;
+		}
+		else {
+			pNode = pNode->pNext;
+			++nIndex;
+		}
+	}
+	printf("Not Found!\n");
+	return NULL;
 }
 
+NODE* R_FindNode(int _nData) {
+	//if found, print Node index, data
+	//if not, print "Not Found"
+	NODE* pNode = tail;
+	//int nIndex = 1;
+	while (NULL != pNode) {
+		if (_nData == pNode->nData) {
+			printf("Node Data: %d\n",  _nData);
+			return pNode;
+		}
+		else {
+			pNode = pNode->pPrev;
+			//++nIndex;
+		}
+	}
+	printf("Not Found!\n");
+	return NULL;
+}
+
+void DeleteNode(int _nData) {
+	if (_nData >= GetAverage()) {
+		NODE* pNode = R_FindNode(_nData);
+		if (NULL == pNode) {
+			printf("\nDelete Failed\n");
+			return;
+		}
+		pNode->pPrev->pNext = pNode->pNext;
+		pNode->pNext->pPrev = pNode->pPrev;
+		free(pNode);
+		pNode = NULL;
+	}
+	else {
+		NODE* pNode = FindNode(_nData);
+		if (NULL == pNode) {
+			printf("\nDelete Failed\n");
+			return;
+		}
+		pNode->pPrev->pNext = pNode->pNext;
+		pNode->pNext->pPrev = pNode->pPrev;
+		free(pNode);
+		pNode = NULL;
+	}	
+}
 void InsertNodeFromTail(int _nData) {
 	NODE* pNewNode = (NODE*)malloc(sizeof(NODE));
 	pNewNode->pNext = NULL;
@@ -138,14 +199,22 @@ int main(void) {
 		if (input == EOF) break; //-1, Break
 
 		if (input >= GetAverage()) {
-			printf("\n Average = %d\n", GetAverage());
+			printf("Tail Insert!\n");
+			printf("Average = %d\n", GetAverage());
 			InsertNodeFromTail(input);
 		}
 		else {
-			printf("\n Average = %d\n", GetAverage());
+			printf("Head Insert!\n");
+			printf("Average = %d\n", GetAverage());
 			InsertNodeFromHead(input);
 		}
 	}
+	PrintList_Head();
+	PrintList_Tail();
+	printf("\n");
+	DeleteNode(10);
+	DeleteNode(30);
+	DeleteNode(99);
 	PrintList_Head();
 	PrintList_Tail();
 	return 0;
